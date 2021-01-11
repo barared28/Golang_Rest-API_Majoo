@@ -53,7 +53,7 @@ func Register(ctx *fiber.Ctx) error {
 	}
 	file, err := ctx.FormFile("foto")
 	if err != nil {
-		return err
+		return ctx.SendStatus(fiber.StatusUnauthorized)
 	}
 	pathFile := fmt.Sprintf("./uploads/%s", file.Filename)
 	ctx.SaveFile(file, pathFile)
